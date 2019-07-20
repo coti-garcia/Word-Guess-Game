@@ -1,25 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game</title>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Outline|Roboto:400,700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <div class="row">
-            <div id="game" class="col">
-                <h1>Word Guess Game</h1>
+    <div class="main-content">
+        <div id="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="title text-center">Word Guess Game</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="row score">
+                            <div class="col-6 text-center">
+                                <div id="wins" class="circle">
+                                    
+                                </div>
+                                <h3>WINS</h3>
+                            </div>
+                            <div id="guesses-remaining" class="col-6 text-center">
+                                <div class="circle">
+                                
+                                </div>
+                                <h3># Of guesses remaining</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div id="word" class="col-12 text-center">
+
+                                </div>
+                        </div>    
+                    </div>
+                    <div class="col-12 col-md-8 text-center">
+                        <div id="photo">
+                            <span class="tape top"></span>
+                            <span class="tape bottom"></span>
+                            <img src="http://via.placeholder.com/250x300" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row bottom-section">
+                    <div class="col-12">
+                        <h4>Letters Already Guessed:</h4>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="./assets/js/game.js"></script>
 </body>
+
 </html>
