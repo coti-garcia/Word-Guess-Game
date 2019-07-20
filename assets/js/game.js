@@ -17,6 +17,7 @@ $(document).ready(function(){
         // Determines which key was pressed.
         const userGuess = event.key;
         console.log(userGuess);
+        $("#used-letters").append(`<span>${userGuess}</span>`);
     };
 
 });
