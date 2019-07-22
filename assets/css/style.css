@@ -77,12 +77,18 @@ h1.title{
     width: auto;
     display: inline;
 }
+#word {
+    display: flex;
+    justify-content: center;
+}
 #word span {
     height: 50px;
     width: 40px;
     border-bottom: solid 2px;
     display: inline-block;
     margin-right: 20px;
+    line-height: 50px;
+    text-transform: uppercase;
 }
 #used-letters {
     width: auto;

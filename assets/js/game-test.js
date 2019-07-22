@@ -1,65 +1,84 @@
 $(document).ready(function(){
     let wins = 0;
-    let word = "kalho";
-    let imagePath = `./assets/images/${word}.jpg`;
-    let wordLength = word.length;
-    let guessesRemaining = wordLength * 2;
-   
     $("#wins").append(wins);
-    //Forloop for span letters word
-    for( i = 0; i < wordLength; i++){
-            $("#word").append("<span>");
-            console.log(word[i]); // Result Letters of the word.
-    };
-    $("#word-image").attr("src", imagePath);            
-    $("#guesses-remaining").append(guessesRemaining);
+    const letters = ["q", "w" , "e", "r", "t", "y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"]
 
-    $(document).keyup(function(event){
-        const userGuess = event.key;
-        console.log(userGuess);
-        $("#used-letters").append(`<span>${userGuess}</span>`);
-    });
-
-    // Groups of name 1
-    const wordsForGame = {
-        kalho : {
+    // Groups of words
+    const words = [{
             name : "kalho",
-            imagePath : "./assets/images/frida-kalho.jpg",
-            active : false
+            active : true
         },
-        spencer : {
+        {
             name : "spencer",
-            imagePath : "./assets/images/diana.jpg",
             active : false
         },
-        degeneres : {
+        {
             name : "degeneres",
-            imagePath : "./assets/images/ellen-degeneres.jpg",
             active : false
         },
-        obama : {
+        
+        {
             name : "obama",
-            imagePath : "./assets/images/michelle-obama.jpg",
             active : false
-        },
-        streep : {
+        },{
             name : "streep",
-            imagePath : "./assets/images/meryl-streep.jpg",
             active : false
         }
-    }
-    console.log(wordsForGame);
-    for (let [key, value] of Object.entries(wordsForGame)) {
-        let namesOfGame = key.length;
-        console.log(`${key} ${namesOfGame}`);
-    }
-    
-    //Groups of name 2
-    const wordsToGuess = {
-        names : ["kalho", "spencer", "obama"],
-        imagePath : ["1", "2", "3"],
-        active: [false, false, false]
-    }
-    console.log(wordsToGuess);
+    ]
+    let wordIndex = 0;
+    //const words = [kalho, spencer, degeneres, obama, streep];
+    //console.log(words);
+
+
+    function game(word){
+        $("#used-letters").empty();
+        let wordLength = word.length;
+        let guessesRemaining = wordLength * 2;
+        let imagePath = `./assets/images/${word}.jpg`;
+        let userGuessesArr = [];
+
+        //Forloop for span letters word
+        for( i = 0; i < wordLength; i++){
+            $("#word").append("<span>");
+            // console.log(word[i]); // Result Letters of the word.
+        };
+        $("#word-image").attr("src", imagePath);
+        $("#guesses-remaining").append(guessesRemaining);
+    };
+
+ 
+
+    // $(document).keyup(function(event){
+    //     const userGuess = event.key;
+    //     console.log(userGuess);
+    //     $("#used-letters").append(`<span>${userGuess}</span>`);
+        
+    // });
+
+    $(document).keyup(function(event){
+        let userGuess = event.key;
+        console.log(userGuess);
+        // if (userGuessesArr.includes(userGuess)){
+        //     alert("Already Guessed! please choose another letter")
+        // }else if (letters.includes(userGuess)){
+        //     userGuessesArr.push(userGuess);
+        //     console.log(userGuessesArr);
+        //     $("#used-letters").append(`<span>${userGuess}</span>`);
+        // } 
+        if(true){
+            wordIndex++;
+            game(words[wordIndex].name);
+        }
+    });
+
+    game(words[wordIndex].name);
+
+
+
+game(words[wordIndex].name);
+console.log(words[wordIndex].name)
+   // game(kalho.name);
+
+
 
 });
