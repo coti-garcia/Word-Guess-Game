@@ -71,6 +71,11 @@ h1.title{
 }
 .bottom-section{
     margin-top: 50px;
+    margin-bottom: 30px;
+}
+.bottom-section h4{
+    width: auto;
+    display: inline;
 }
 #word span {
     height: 50px;
@@ -78,4 +83,13 @@ h1.title{
     border-bottom: solid 2px;
     display: inline-block;
     margin-right: 20px;
+}
+#used-letters {
+    width: auto;
+    display: inline-block;
+}
+#used-letters span {
+    padding: 0 10px;
+    text-transform: uppercase;
+    border-right: solid thin #ccc;
 }
