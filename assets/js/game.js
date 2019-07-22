@@ -1,6 +1,32 @@
 $(document).ready(function(){
     let wins = 0;
     $("#wins").append(wins);
+    // Groups of name 1
+    const kalho = {
+            name : "kalho",
+            active : true
+        };
+
+    const spencer = {
+            name : "spencer",
+            active : false
+        };
+    
+    const  degeneres = {
+            name : "degeneres",
+            active : false
+        };
+
+    const obama = {
+            name : "obama",
+            active : false
+        };
+    
+    const streep = {
+            name : "streep",
+            active : false
+        };
+    
 
     function game(word){
         let wordLength = word.length;
@@ -15,8 +41,7 @@ $(document).ready(function(){
         $("#guesses-remaining").append(guessesRemaining);
     };
 
-    $game(obama);
-    console.log(game());
+    game(degeneres.name);
 
     $(document).keyup(function(event){
         const userGuess = event.key;
@@ -24,34 +49,9 @@ $(document).ready(function(){
         $("#used-letters").append(`<span>${userGuess}</span>`);
     });
 
-    // Groups of name 1
-    const wordsForGame = {
-        kalho : {
-            name : "kalho",
-            imagePath : "./assets/images/frida-kalho.jpg",
-            active : false
-        },
-        spencer : {
-            name : "spencer",
-            imagePath : "./assets/images/diana.jpg",
-            active : false
-        },
-        degeneres : {
-            name : "degeneres",
-            imagePath : "./assets/images/ellen-degeneres.jpg",
-            active : false
-        },
-        obama : {
-            name : "obama",
-            imagePath : "./assets/images/michelle-obama.jpg",
-            active : false
-        },
-        streep : {
-            name : "streep",
-            imagePath : "./assets/images/meryl-streep.jpg",
-            active : false
-        }
-    }
 
+
+    const words = [kalho, spencer, degeneres, obama, streep];
+    console.log(words);
 
 });
