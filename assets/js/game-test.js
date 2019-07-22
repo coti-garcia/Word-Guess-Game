@@ -1,22 +1,18 @@
 $(document).ready(function(){
     let wins = 0;
+    let word = "kalho";
+    let imagePath = `./assets/images/${word}.jpg`;
+    let wordLength = word.length;
+    let guessesRemaining = wordLength * 2;
+   
     $("#wins").append(wins);
-
-    function game(word){
-        let wordLength = word.length;
-        let guessesRemaining = wordLength * 2;
-        let imagePath = `./assets/images/${word}.jpg`;
-        //Forloop for span letters word
-            for( i = 0; i < wordLength; i++){
-                $("#word").append("<span>");
-                console.log(word[i]); // Result Letters of the word.
-            };
-        $("#word-image").attr("src", imagePath);
-        $("#guesses-remaining").append(guessesRemaining);
+    //Forloop for span letters word
+    for( i = 0; i < wordLength; i++){
+            $("#word").append("<span>");
+            console.log(word[i]); // Result Letters of the word.
     };
-
-    $game(obama);
-    console.log(game());
+    $("#word-image").attr("src", imagePath);            
+    $("#guesses-remaining").append(guessesRemaining);
 
     $(document).keyup(function(event){
         const userGuess = event.key;
@@ -52,6 +48,18 @@ $(document).ready(function(){
             active : false
         }
     }
-
+    console.log(wordsForGame);
+    for (let [key, value] of Object.entries(wordsForGame)) {
+        let namesOfGame = key.length;
+        console.log(`${key} ${namesOfGame}`);
+    }
+    
+    //Groups of name 2
+    const wordsToGuess = {
+        names : ["kalho", "spencer", "obama"],
+        imagePath : ["1", "2", "3"],
+        active: [false, false, false]
+    }
+    console.log(wordsToGuess);
 
 });
