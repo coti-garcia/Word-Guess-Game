@@ -93,3 +93,6 @@ h1.title{
     text-transform: uppercase;
     border-right: solid thin #ccc;
 }
+#word-image{
+    width: 250px;
+}
