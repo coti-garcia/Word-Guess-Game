@@ -21,53 +21,84 @@ $(document).ready(function(){
             $("#word").append(`<span id=${word[i]}>`);
         };
         $("#word-image").attr("src", imagePath);
-
+        if ( wordIndex < 4 ) {
+            console.log("you can play");
+        }else{
+            console.log("end of the game");
+        }
         console.log(wordPoints[wordIndex]);
     };
 
-    $(document).keyup(function(event){
-        let userGuess = event.key;
-        const matches = word.match(event.key);
-        // if (matches){
-        //     points++
-        // }
-        if (userGuessesArr.includes(userGuess)){
-            alert("Already Guessed! please choose another letter")
-            if (matches){
-                points--
-            }
-        }else if (letters.includes(userGuess)){
-            userGuessesArr.push(userGuess);
-            $("#used-letters").append(`<span>${userGuess}</span>`);
-            guessesRemaining = guessesRemaining - 1;
-            $("#guesses-remaining").text(guessesRemaining);
-        } 
-        if( words[wordIndex].includes(userGuess)){
-            $(`#word span#${userGuess}`).text(userGuess);
-            points++
-            console.log("points: "+ points);
-        }
-        if( points == wordPoints[wordIndex]){
-            wins++;
-            points = 1;
-            $("#wins").text(wins);
-            $("#win-message").append("<h5>You got it! Try a new word!</h5>");
-            $("#win-message").append('<button id="next-word">Next Word</button>');
-            $( "#next-word" ).click(function() {
-                wordIndex ++
-                $( "#word" ).empty();
-                $( "#used-letters" ).empty();
-                $( "#win-message" ).empty();
-                userGuessesArr = [];
-                points = 0;
-                guessesRemaining = 10;
-                $("#guesses-remaining").text(guessesRemaining);
-                game(words[wordIndex]);
-            });
-        }
-    });
+    function empty(){
+        $( "#word" ).empty();
+        $( "#used-letters" ).empty();
+        $( "#win-message" ).empty();
+        userGuessesArr = [];
+        points = 0;
+        guessesRemaining = 10;
+        $("#guesses-remaining").text(guessesRemaining);
+    };
 
+
+    $(document).keyup(function(event){
+            let userGuess = event.key;
+            const matches = word.match(event.key);
+            // if (matches){
+            //     points++
+            // }
+            if (userGuessesArr.includes(userGuess)){
+                alert("Already Guessed! please choose another letter")
+                if (matches){
+                    points--
+                }
+            }else if (letters.includes(userGuess)){
+                userGuessesArr.push(userGuess);
+                $("#used-letters").append(`<span>${userGuess}</span>`);
+                guessesRemaining = guessesRemaining - 1;
+                $("#guesses-remaining").text(guessesRemaining);
+            } 
+            if( words[wordIndex].includes(userGuess)){
+                $(`#word span#${userGuess}`).text(userGuess);
+                points++
+                console.log("points: "+ points);
+            }
+            if( points == wordPoints[wordIndex]){
+                wins++;
+                points = 1;
+                $("#wins").text(wins);
+                if ( wordIndex < 4 ) {
+                    $("#win-message").append("<h5>You got it! Try a new word!</h5>");
+                    $("#win-message").append('<button id="next-word">Next Word</button>');
+                }else{
+                    $("#win-message").append("<h5>You got it!</h5>");
+                    $("#win-message").append("<h4>End of the game!</h4>");
+                }
+                $( "#next-word" ).click(function() {
+                    wordIndex ++
+                    empty();
+                    game(words[wordIndex]);
+                });
+            } else if(guessesRemaining === 0){
+                points = 1;
+                $("#wins").text(wins);
+                if ( wordIndex < 4 ) {
+                    $("#win-message").append("<h5>You didn't guess, but try a new word!</h5>");
+                    $("#win-message").append('<button id="next-word">Next Word</button>');
+                }else{
+                    $("#win-message").append("<h5>Sorry, you didn't guess!</h5>");
+                    $("#win-message").append("<h4>End of the game!</h4>");
+                }
+                $( "#next-word" ).click(function() {
+                    wordIndex ++
+                    empty();
+                    game(words[wordIndex]);
+                });
+            }
+            
+     });       
     
+    
+
 
     $( "#start" ).click(function() {
         game(word);

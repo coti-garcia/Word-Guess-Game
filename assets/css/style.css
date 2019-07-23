@@ -122,6 +122,6 @@ button:hover{
     text-transform: uppercase;
     margin-bottom: 20px;
 }
-div#win-message {
-    margin: 50px 0 0;
+button#start{
+    margin-top: 50px;
 }
