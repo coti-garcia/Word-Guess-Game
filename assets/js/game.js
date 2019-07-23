@@ -52,11 +52,13 @@ $(document).ready(function(){
         if( words[wordIndex].length === points ){
             wins++;
             $("#wins").text(wins);
+            $("#win-message").append("<h5>You got it! Try a new word!</h5>");
+            $("#win-message").append("<p>Press any key to play again</p>");
         }
     });
 
 
-    
+
 
     console.log("points:" + points);
 console.log(words[wordIndex].length);
