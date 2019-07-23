@@ -5,33 +5,27 @@ $(document).ready(function(){
     let guessesRemaining = 0;
     let points = 0;
     $("#guesses-remaining").append(guessesRemaining);
-
-    let wordIndex = 0;
-   
+ 
     const words = ["kalho", "spencer", "degeneres", "obama", "streep"];
-    //console.log(words);
-
+    let wordIndex = 0;
+    let word = words[wordIndex];
+    console.log(words.length)
+    let  wordLettersArr = [];
     let userGuessesArr = [];
-    let wordLettersArr = [];
 
     function game(word){
-        let wordLength = word.length;
-        let imagePath = `./assets/images/${word}.jpg`;
-        let wordArr = Array.from(word);
-       // console.log(wordArr);
+        const wordLength = word.length;
+        const imagePath = `./assets/images/${word}.jpg`;
+        const wordArr = Array.from(word);
+        const uniqueSet = new Set(wordArr);
+        const cleanWordArr = [... uniqueSet];
+        console.log(cleanWordArr);
         //Forloop for span letters word
         for( i = 0; i < wordLength; i++){
             $("#word").append(`<span id=${word[i]}>`);
         };
         $("#word-image").attr("src", imagePath);
     };
-
-    $( "#start" ).click(function() {
-        game(words[wordIndex]);
-        $( "#start" ).remove(); 
-        guessesRemaining = 10;
-        $("#guesses-remaining").text(guessesRemaining);
-    });
 
     $(document).keyup(function(event){
         let userGuess = event.key;
@@ -53,15 +47,51 @@ $(document).ready(function(){
             wins++;
             $("#wins").text(wins);
             $("#win-message").append("<h5>You got it! Try a new word!</h5>");
-            $("#win-message").append("<p>Press any key to play again</p>");
+            $("#win-message").append('<button id="next-word">Next Word</button>');
+            $( "#next-word" ).click(function() {
+                wordIndex ++
+                $( "#word" ).empty();
+                $( "#used-letters" ).empty();
+                $( "#win-message" ).empty();
+                userGuessesArr = [];
+                guessesRemaining = 10;
+                $("#guesses-remaining").text(guessesRemaining);
+                game(words[wordIndex]);
+            });
+        
         }
+        if( words[wordIndex].length < points ){
+            $( "#win-message" ).remove(); 
+            wordIndex++
+            game(words[wordIndex]);
+            userGuessesArr = [];
+        }
+    });
+
+    $( "#next-word" ).click(function() {
+        wordIndex ++
+        $( "#word" ).empty();
+        $( "#used-letters" ).empty();
+        $( "#win-message" ).empty();
+        userGuessesArr = [];
+        guessesRemaining = 10;
+        $("#guesses-remaining").text(guessesRemaining);
+        game(words[wordIndex]);
+    });
+
+    $( "#start" ).click(function() {
+        game(word);
+        $( "#start" ).remove(); 
+        guessesRemaining = 10;
+        $("#guesses-remaining").text(guessesRemaining);
     });
 
 
 
 
     console.log("points:" + points);
-console.log(words[wordIndex].length);
+    console.log(words[wordIndex].length);
+    
     // Compare the value of two arrays
     function intersect_arrays(a, b) {
         const sorted_b = b.concat().sort();
