@@ -2,7 +2,7 @@ $(document).ready(function(){
     let wins = 0;
     $("#wins").append(wins);
     const letters = ["q", "w" , "e", "r", "t", "y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"]
-    let guessesRemaining = 0;
+    let guessesRemaining = 10;
     $("#guesses-remaining").append(guessesRemaining);
 
     let wordIndex = 2;
@@ -14,11 +14,11 @@ $(document).ready(function(){
     let wordLettersArr = [];
 
     function game(word){
-        guessesRemaining = 10;
+    
         let wordLength = word.length;
         let imagePath = `./assets/images/${word}.jpg`;
         let wordArr = Array.from(word);
-        console.log(wordArr);
+       // console.log(wordArr);
         //Forloop for span letters word
         for( i = 0; i < wordLength; i++){
             $("#word").append(`<span id=${word[i]}>`);
@@ -37,19 +37,18 @@ $(document).ready(function(){
             alert("Already Guessed! please choose another letter")
         }else if (letters.includes(userGuess)){
             userGuessesArr.push(userGuess);
-            console.log(userGuessesArr);
             $("#used-letters").append(`<span>${userGuess}</span>`);
             guessesRemaining = 9;
         } 
         if( words[wordIndex].includes(userGuess)){
             $(`#word span#${userGuess}`).text(userGuess);
             wordLettersArr.push(userGuess);
-            console.log("word array" + wordLettersArr);
         }
     });
 
 
-
+    console.log(userGuessesArr);
+    console.log(wordLettersArr);
 
     // Compare the value of two arrays
     function intersect_arrays(a, b) {

@@ -102,3 +102,14 @@ h1.title{
 #word-image{
     width: 250px;
 }
+button#start {
+    margin-top: 80px;
+    background: #e9596b;
+    color: #FFF;
+    padding: 15px 50px;
+    font-size: 20px;
+    border: none;
+}
+button#start:hover{
+    background: #2c2d3c;
+}
