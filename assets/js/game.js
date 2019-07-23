@@ -42,13 +42,9 @@ $(document).ready(function(){
 
     $(document).keyup(function(event){
             let userGuess = event.key;
-            const matches = word.match(event.key);
-            // if (matches){
-            //     points++
-            // }
             if (userGuessesArr.includes(userGuess)){
                 alert("Already Guessed! please choose another letter")
-                if (matches){
+                if( words[wordIndex].includes(userGuess)){
                     points--
                 }
             }else if (letters.includes(userGuess)){
@@ -96,9 +92,6 @@ $(document).ready(function(){
             }
             
      });       
-    
-    
-
 
     $( "#start" ).click(function() {
         game(word);
@@ -106,14 +99,6 @@ $(document).ready(function(){
         guessesRemaining = 10;
         $("#guesses-remaining").text(guessesRemaining);
     });
-
-
-    
-
-
-//game(words[wordIndex].name);
-//console.log(words[wordIndex].name)
-   // game(kalho.name);
 
 
 
