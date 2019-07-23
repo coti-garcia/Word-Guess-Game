@@ -6,31 +6,36 @@ $(document).ready(function(){
     let points = 0;
     $("#guesses-remaining").append(guessesRemaining);
  
-    const words = ["kalho", "spencer", "degeneres", "obama", "streep"];
+    const words = ["kalho", "obama", "degeneres" , "streep","spencer"];
+    const wordPoints = [5,4,6,5,6];
     let wordIndex = 0;
     let word = words[wordIndex];
-    console.log(words.length)
-    let  wordLettersArr = [];
     let userGuessesArr = [];
+    
 
     function game(word){
         const wordLength = word.length;
         const imagePath = `./assets/images/${word}.jpg`;
-        const wordArr = Array.from(word);
-        const uniqueSet = new Set(wordArr);
-        const cleanWordArr = [... uniqueSet];
-        console.log(cleanWordArr);
         //Forloop for span letters word
         for( i = 0; i < wordLength; i++){
             $("#word").append(`<span id=${word[i]}>`);
         };
         $("#word-image").attr("src", imagePath);
+
+        console.log(wordPoints[wordIndex]);
     };
 
     $(document).keyup(function(event){
         let userGuess = event.key;
+        const matches = word.match(event.key);
+        // if (matches){
+        //     points++
+        // }
         if (userGuessesArr.includes(userGuess)){
             alert("Already Guessed! please choose another letter")
+            if (matches){
+                points--
+            }
         }else if (letters.includes(userGuess)){
             userGuessesArr.push(userGuess);
             $("#used-letters").append(`<span>${userGuess}</span>`);
@@ -39,12 +44,12 @@ $(document).ready(function(){
         } 
         if( words[wordIndex].includes(userGuess)){
             $(`#word span#${userGuess}`).text(userGuess);
-            wordLettersArr.push(userGuess);
             points++
-            console.log("points:" + points);
+            console.log("points: "+ points);
         }
-        if( words[wordIndex].length === points ){
+        if( points == wordPoints[wordIndex]){
             wins++;
+            points = 1;
             $("#wins").text(wins);
             $("#win-message").append("<h5>You got it! Try a new word!</h5>");
             $("#win-message").append('<button id="next-word">Next Word</button>');
@@ -54,30 +59,15 @@ $(document).ready(function(){
                 $( "#used-letters" ).empty();
                 $( "#win-message" ).empty();
                 userGuessesArr = [];
+                points = 0;
                 guessesRemaining = 10;
                 $("#guesses-remaining").text(guessesRemaining);
                 game(words[wordIndex]);
             });
-        
-        }
-        if( words[wordIndex].length < points ){
-            $( "#win-message" ).remove(); 
-            wordIndex++
-            game(words[wordIndex]);
-            userGuessesArr = [];
         }
     });
 
-    $( "#next-word" ).click(function() {
-        wordIndex ++
-        $( "#word" ).empty();
-        $( "#used-letters" ).empty();
-        $( "#win-message" ).empty();
-        userGuessesArr = [];
-        guessesRemaining = 10;
-        $("#guesses-remaining").text(guessesRemaining);
-        game(words[wordIndex]);
-    });
+    
 
     $( "#start" ).click(function() {
         game(word);
@@ -85,42 +75,6 @@ $(document).ready(function(){
         guessesRemaining = 10;
         $("#guesses-remaining").text(guessesRemaining);
     });
-
-
-
-
-    console.log("points:" + points);
-    console.log(words[wordIndex].length);
-    
-    // Compare the value of two arrays
-    function intersect_arrays(a, b) {
-        const sorted_b = b.concat().sort();
-        const sorted_a = a.concat().sort();
-        const common = [];
-        const a_i = 0;
-        const b_i = 0;
-    
-        while (a_i < a.length
-               && b_i < b.length)
-        {
-            if (sorted_a[a_i] === sorted_b[b_i]) {
-                common.push(sorted_a[a_i]);
-                a_i++;
-                b_i++;
-            }
-            else if(sorted_a[a_i] < sorted_b[b_i]) {
-                a_i++;
-            }
-            else {
-                b_i++;
-            }
-        }
-        return common;
-    }
-    
-    intersect_arrays(userGuessesArr, wordLettersArr); // Return Common
-    
-    
 
 
     
