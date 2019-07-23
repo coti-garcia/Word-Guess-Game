@@ -2,10 +2,11 @@ $(document).ready(function(){
     let wins = 0;
     $("#wins").append(wins);
     const letters = ["q", "w" , "e", "r", "t", "y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"]
-    let guessesRemaining = 10;
+    let guessesRemaining = 0;
+    let points = 0;
     $("#guesses-remaining").append(guessesRemaining);
 
-    let wordIndex = 2;
+    let wordIndex = 0;
    
     const words = ["kalho", "spencer", "degeneres", "obama", "streep"];
     //console.log(words);
@@ -14,7 +15,6 @@ $(document).ready(function(){
     let wordLettersArr = [];
 
     function game(word){
-    
         let wordLength = word.length;
         let imagePath = `./assets/images/${word}.jpg`;
         let wordArr = Array.from(word);
@@ -29,6 +29,8 @@ $(document).ready(function(){
     $( "#start" ).click(function() {
         game(words[wordIndex]);
         $( "#start" ).remove(); 
+        guessesRemaining = 10;
+        $("#guesses-remaining").text(guessesRemaining);
     });
 
     $(document).keyup(function(event){
@@ -38,18 +40,26 @@ $(document).ready(function(){
         }else if (letters.includes(userGuess)){
             userGuessesArr.push(userGuess);
             $("#used-letters").append(`<span>${userGuess}</span>`);
-            guessesRemaining = 9;
+            guessesRemaining = guessesRemaining - 1;
+            $("#guesses-remaining").text(guessesRemaining);
         } 
         if( words[wordIndex].includes(userGuess)){
             $(`#word span#${userGuess}`).text(userGuess);
             wordLettersArr.push(userGuess);
+            points++
+            console.log("points:" + points);
+        }
+        if( words[wordIndex].length === points ){
+            wins++;
+            $("#wins").text(wins);
         }
     });
 
 
-    console.log(userGuessesArr);
-    console.log(wordLettersArr);
+    
 
+    console.log("points:" + points);
+console.log(words[wordIndex].length);
     // Compare the value of two arrays
     function intersect_arrays(a, b) {
         const sorted_b = b.concat().sort();
